@@ -8,7 +8,7 @@ class DogApi {
     const options = {
       method: 'GET'
     }
-    return this.fetchJson(endpoint, options)
+    return this._fetchJson(endpoint, options)
   }
 
   getDogs() {
@@ -16,7 +16,7 @@ class DogApi {
     const options = {
       method: 'GET'
     }
-    return this.fetchJson(endpoint, options)
+    return this._fetchJson(endpoint, options)
   }
 
   postDog(dogObject) {
@@ -29,7 +29,7 @@ class DogApi {
       },
       body: JSON.stringify(dogObject)
     }
-    return this.fetchJson(endpoint, options)
+    return this._fetchJson(endpoint, options)
   }
 
   patchDog(id, dogObject) {
@@ -42,7 +42,7 @@ class DogApi {
       },
       body: JSON.stringify(dogObject)
     }
-    return this.fetchJson(endpoint, options)
+    return this._fetchJson(endpoint, options)
   }
 
   deleteDog(id) {
@@ -50,10 +50,10 @@ class DogApi {
     const options = {
       method: 'DELETE'
     }
-    return this.fetchJson(endpoint, options)
+    return this._fetchJson(endpoint, options)
   }
 
-  fetchJson(endpoint, options) {
+  _fetchJson(endpoint, options) {
     return fetch(`${this.baseUri}${endpoint}`, options)
       .then(response => {
         if (response.ok) {

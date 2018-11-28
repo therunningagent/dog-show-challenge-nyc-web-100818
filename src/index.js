@@ -1,6 +1,6 @@
-const controller = new DogController()
 
 document.addEventListener('DOMContentLoaded', () => {
+  const controller = new DogController()
   const tableBody = document.getElementById('table-body')
   const dogForm = document.getElementById('dog-form')
 
@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
   // edit dog event
-  tableBody.addEventListener('click', event => {
-    if (event.target.nodeName === "BUTTON") {
+  tableBody.addEventListener('click', e => {
+    if (e.target.nodeName === "BUTTON") {
       // find the dog
-      const dogId = event.target.dataset.id
+      const dogId = e.target.dataset.id
       const dog = controller.findDogById(dogId)
       // copy to form
       dogForm.dataset.id = dogId
@@ -24,18 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  dogForm.addEventListener('submit', event => {
-    event.preventDefault()
-    const dogId = event.target.dataset.id
+  dogForm.addEventListener('submit', e => {
+    e.preventDefault()
+    const dogId = e.target.dataset.id
     const dog = controller.findDogById(dogId)
     // update our local doggo
-    dog.name = event.target.querySelector('input[name="name"]').value
-    dog.breed = event.target.querySelector('input[name="breed"]').value
-    dog.sex = event.target.querySelector('input[name="sex"]').value
+    dog.name = e.target.querySelector('input[name="name"]').value
+    dog.breed = e.target.querySelector('input[name="breed"]').value
+    dog.sex = e.target.querySelector('input[name="sex"]').value
     // optimistic rendering + reset the form
     renderApp()
-    event.target.dataset.id = 0
-    event.target.reset()
+    e.target.dataset.id = 0
+    e.target.reset()
     // then update the API
     dogObj = dog.toPojo()
     controller.updateDog(dogId, dogObj)

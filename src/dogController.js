@@ -27,7 +27,6 @@ class DogController {
     return this.dogs.find(dog => dog.id == id)
   }
   
-  // map dog elements and show em
   render() {
     return this.dogs.map(dog => dog.render()).join("")
   }
