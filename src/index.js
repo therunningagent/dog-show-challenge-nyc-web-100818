@@ -1,6 +1,6 @@
 getAllDogs();
 
-/* Having issues rerendering the table */ 
+/* Having issues rerendering the table */
 
 const tableBody = document.querySelector('tbody#table-body');
 const dogForm = document.querySelector('#dog-form');
@@ -11,9 +11,12 @@ const dogSexForm = dogForm.querySelector('input[name="sex"]');
 function getAllDogs() {
     fetch('http://localhost:3000/dogs')
         .then(response => response.json())
-        .then(dogs => dogs.forEach(function (dog) {
-            renderDog(dog)
-        })
+        .then(dogs => {
+            tableBody.innerHTML = "";
+            dogs.forEach(function (dog) {
+                renderDog(dog)
+            })
+        }
         )
 };
 
@@ -38,6 +41,8 @@ function fetchUpdate(id, dogObj) {
 // Render Dog // 
 
 function renderDog(dog) {
+    // console.log('check')
+    // tableBody.innerHTML = "";
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     const tdBreed = document.createElement('td');
@@ -55,14 +60,13 @@ function renderDog(dog) {
     tableBody.append(tr, tdName, tdBreed, tdSex, button);
 
     button.addEventListener('click', event => {
-        grabDogId(event);
+        dogInformation(dog.id)
     })
 }
 
-function grabDogId(dogEvent) {
-    let dogId = dogEvent.target.dataset.dogId;
-    dogInformation(dogId);
-}
+// function renderUpdatedDogs(dog){
+
+// }
 
 function updateDogInfo(dogObj) {
     dogNameForm.value = dogObj.name;
